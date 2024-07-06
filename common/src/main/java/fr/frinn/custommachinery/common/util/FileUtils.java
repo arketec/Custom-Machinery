@@ -41,6 +41,11 @@ public class FileUtils {
             File file = new File(root, machine.getId().getPath() + ".json");
             CustomMachinery.LOGGER.info("Writing new machine: {} in {}", machine.getLocation().getId(), file.getPath());
             try {
+                if (!file.getParentFile().exists()) {
+                    if (!file.getParentFile().mkdirs()) {
+                        CustomMachinery.LOGGER.error("Can't create directory for '{}'", file.getParentFile().getAbsolutePath());
+                    }
+                }
                 if(file.exists() || file.createNewFile()) {
                     JsonWriter writer = GSON.newJsonWriter(new FileWriter(file));
                     GSON.toJson(json, writer);
