@@ -8,6 +8,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import dev.architectury.platform.Platform;
 import fr.frinn.custommachinery.CustomMachinery;
+import fr.frinn.custommachinery.common.integration.config.CMConfig;
 import fr.frinn.custommachinery.common.machine.CustomMachine;
 import fr.frinn.custommachinery.common.machine.MachineLocation;
 import fr.frinn.custommachinery.common.network.SUpdateMachinesPacket;
@@ -40,6 +41,10 @@ public class FileUtils {
                 root = root.substring(0, root.length() - 2);
             if(kubejs)
                 root = root + File.separator + "kubejs" + File.separator + "data" + File.separator + machine.getId().getNamespace() + File.separator + "machines";
+            else if (!CMConfig.get().defaultNewMachinePath.isEmpty())
+                root = root
+                        + (CMConfig.get().defaultNewMachinePath.startsWith("/") ? "" : File.separator)
+                        + CMConfig.get().defaultNewMachinePath.replaceFirst("./","");
             File file = new File(root, machine.getId().getPath() + ".json");
             CustomMachinery.LOGGER.info("Writing new machine: {} in {}", machine.getLocation().getId(), file.getPath());
             try {
