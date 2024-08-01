@@ -36,7 +36,7 @@ public class FileUtils {
             JsonElement json = result.result().get();
             String root = server.getServerDirectory().getAbsolutePath();
 
-            if (root.endsWith(File.separator))
+            if (root.endsWith(File.separator + "."))
                 root = root.substring(0, root.length() - 2);
             if(kubejs)
                 root = root + File.separator + "kubejs" + File.separator + "data" + File.separator + machine.getId().getNamespace() + File.separator + "machines";
