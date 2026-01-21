@@ -34,7 +34,7 @@ public class MachineRecipeFinder {
                 .stream()
                 .filter(recipe -> tile.getMachine().getRecipeIds().contains(recipe.getMachineId()))
                 .sorted(Comparators.RECIPE_PRIORITY_COMPARATOR.reversed())
-                .map(CustomMachineRecipe::checker)
+                .map(RecipeChecker::new)
                 .toList();
         this.okToCheck = new ArrayList<>();
         this.recipeCheckCooldown = tile.getLevel().random.nextInt(this.baseCooldown);

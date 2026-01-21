@@ -43,7 +43,6 @@ public class CustomMachineRecipe implements Recipe<Container>, IMachineRecipe {
     private MachineAppearance customAppearance;
     @Nullable
     private List<IGuiElement> customGuiElements;
-    private final Supplier<RecipeChecker<CustomMachineRecipe>> checker = Suppliers.memoize(() -> new RecipeChecker<>(this));
 
     public CustomMachineRecipe(ResourceLocation id, ResourceLocation machine, int time, List<IRequirement<?>> requirements, List<IRequirement<?>> jeiRequirements, int priority, int jeiPriority, boolean resetOnError, boolean hidden, @Nullable MachineAppearance appearance, List<IGuiElement> guiElements) {
         this.id = id;
@@ -161,10 +160,6 @@ public class CustomMachineRecipe implements Recipe<Container>, IMachineRecipe {
         });
         this.customGuiElements = List.copyOf(elements);
         return elements;
-    }
-
-    public RecipeChecker<CustomMachineRecipe> checker() {
-        return checker.get();
     }
 
     /** Vanilla Recipe Implementation **/
