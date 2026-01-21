@@ -363,6 +363,8 @@ public abstract class CustomMachineTile extends MachineTile implements ISyncable
 
         if(nbt.contains("gui", Tag.TAG_LIST))
             this.customGuiElements = IGuiElement.CODEC.listOf().read(NbtOps.INSTANCE, nbt.getList("gui", Tag.TAG_COMPOUND)).result().orElse(Collections.emptyList());
+
+        this.getUpgradeManager().markDirty();
     }
 
     //Needed for multiplayer sync
