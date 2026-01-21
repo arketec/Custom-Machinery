@@ -45,6 +45,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -333,6 +334,11 @@ public class CustomMachineBlock extends Block implements EntityBlock, IBlockWith
                 .map(blockEntity -> (CustomMachineTile)blockEntity)
                 .map(machine -> PlatformHelper.hasCorrectToolsForDrops(player, MachineBlockState.CACHE.getUnchecked(machine.getAppearance())))
                 .orElse(player.hasCorrectToolForDrops(state));
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return false;
     }
 
     @Override
